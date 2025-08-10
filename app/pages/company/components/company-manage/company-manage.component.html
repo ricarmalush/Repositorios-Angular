@@ -1,0 +1,137 @@
+<form (ngSubmit)="CompanySave()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+      <strong>Gestión de Compañia</strong>
+    </h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <!-- Agrupación de Países y Provincia -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Países</mat-label>
+        <mat-select formControlName="countryId" (selectionChange)="onSelectCountry($event.value)">
+          <mat-option *ngFor="let country of countries" [value]="country.value">
+            {{ country.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('countryId').hasError('required')">
+          Campo país es requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Provincia</mat-label>
+        <mat-select formControlName="provinceId" (selectionChange)="onSelectProvince($event.value)">
+          <mat-option *ngFor="let province of provinces" [value]="province.value">
+            {{ province.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('provinceId').hasError('required')">
+          Provincia es requerida.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Agrupación de Población y Compañía -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Población</mat-label>
+        <mat-select formControlName="communityId">
+          <mat-option *ngFor="let community of communities" [value]="community.value">
+            {{ community.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('communityId').hasError('required')">
+          La población es requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Compañía</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="form.get('name').hasError('required')">
+          Campo compañía es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Agrupación de Dirección y Email -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="address">
+        <mat-error *ngIf="form.get('address').hasError('required')">
+          Campo dirección es requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.get('email').hasError('required')">
+          Campo email es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Agrupación de Teléfono y Fax -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telephone">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Fax</mat-label>
+        <input matInput formControlName="fax">
+      </mat-form-field>
+    </div>
+
+    <!-- Agrupación de Tipo Documento y Nº Documento -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Tipo Documento</mat-label>
+        <mat-select formControlName="documentTypeId">
+          <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.value">
+            {{ documentType.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('documentTypeId').hasError('required')">
+          Tipo Documento es requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Nº Documento</mat-label>
+        <input matInput formControlName="numDocument">
+        <mat-error *ngIf="form.get('numDocument').hasError('required')">
+          Campo nº documento es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Estado -->
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="state">
+          <mat-option *ngFor="let state of configs.statesSelect" [value]="state.value">
+            {{ state.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('state').hasError('required')">
+          Campo Estado es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCELAR</button>
+    <button color="purple" class="bg-accent text-accent-contrast" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,42 @@
+<div class="map-container">
+  <div id="map" class="map"></div>
+</div>
+
+<form [formGroup]="form" class="form-container">
+  <div fxLayout="column" fxLayoutGap="8px">
+    <app-filter-date-range-ymd
+    (rangeDate)="searchDateRange($event)"
+    [start]="form.get('startDate')?.value"
+    [end]="form.get('endDate')?.value">
+  </app-filter-date-range-ymd>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Usuarios</mat-label>
+        <mat-select formControlName="userId">
+          <mat-option *ngFor="let user of users" [value]="user.value">
+            {{ user.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline" fxFlex="100" style="margin-top: -30px">
+        <mat-label>Puntos de Fichaje</mat-label>
+        <mat-select formControlName="signingUpId" (selectionChange)="onSelectionChange($event)">
+          <mat-option *ngFor="let point of accessPoints" [value]="point.value">
+            {{ point.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+       
+    </div> 
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="searchSelect()">Buscar</button>
+      <button mat-raised-button color="warn" (click)="resetFilters()">Resetear</button>
+    </div>
+  </div>
+</form> 
+

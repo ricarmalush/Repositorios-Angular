@@ -1,0 +1,69 @@
+<form (ngSubmit)="VacationSave()" [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+        <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+            <strong>Gestión de Vacaciones</strong>
+        </h2>
+        <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+            <mat-icon [icIcon]="icClose"></mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content>
+        
+        <div fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Usuarios</mat-label>
+              <mat-select formControlName="userId">
+                <mat-option *ngFor="let user of users" [value]="user.value">
+                  {{ user.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('userId').hasError('required')">
+                Campo usuario es requerido.
+              </mat-error>
+            </mat-form-field>        
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Desde</label>
+            <input type="date" id="startDate" formControlName="startDate" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">Hasta</label>
+            <input type="date" id="endDate" formControlName="endDate" class="form-control"/>
+        </div>
+
+        <!-- Solo mostrar cuando estamos en modo edición -->
+        <div *ngIf="isEditMode" fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Situación</mat-label>
+              <mat-select formControlName="status">
+                <mat-option *ngFor="let status of configs.approvedSelect" [value]="status.value">
+                  {{ status.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('status').hasError('required')">
+                Campo situación es requerido.
+              </mat-error>
+            </mat-form-field>
+        </div>
+
+    </mat-dialog-content>
+    
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">CANCELAR</button>
+      <button
+          color="purple"
+          class="bg-accent text-accent-contrast"
+          mat-button
+          type="submit"
+          [disabled]="
+          isApprovedOrRejected || !form.valid"> 
+          GUARDAR
+      </button>
+  </mat-dialog-actions>
+    
+
+</form>
+
+

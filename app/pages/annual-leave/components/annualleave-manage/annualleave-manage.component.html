@@ -1,0 +1,65 @@
+<form (ngSubmit)="AnnualLeaveaveSave()" [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+        <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+            <strong>Días de Vacaciones</strong>
+        </h2>
+        <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+            <mat-icon [icIcon]="icClose"></mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content>
+
+        <div fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Usuarios</mat-label>
+              <mat-select formControlName="userId">
+                <mat-option *ngFor="let user of users" [value]="user.value">
+                  {{ user.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('userId').hasError('required')">
+                Campo usuario es requerido.
+              </mat-error>
+            </mat-form-field>        
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Año</mat-label>
+                <input matInput formControlName="anyo">
+                <mat-error *ngIf="form.get('anyo').hasError('required')">
+                    Campo Año es requerido.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Nº Vacaciones</mat-label>
+                <input matInput formControlName="daysAvailable">
+                <mat-error *ngIf="form.get('daysAvailable').hasError('required')">
+                    Campo nº vacaciones es requerido.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="state">
+                    <mat-option *ngFor="let state of configs.statesSelect" [value]="state.value">
+                        {{ state.label }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('state').hasError('required')">
+                    Campo Estado es requerido.
+                </mat-error>
+            </mat-form-field>
+        </div>       
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">CANCELAR</button>
+        <button color="purple" class="bg-accent text-accent-contrast" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+    </mat-dialog-actions>
+</form>

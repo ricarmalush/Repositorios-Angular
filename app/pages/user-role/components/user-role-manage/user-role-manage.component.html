@@ -1,0 +1,60 @@
+<form (ngSubmit)="UserRoleSave()" [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+      <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+        <strong>Gestión de Usuario Roles</strong>
+      </h2>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+        <mat-icon [icIcon]="icClose"></mat-icon>
+      </button>
+    </div>
+
+    <mat-dialog-content>
+        
+      <div fxLayout="row" fxLayoutGap="16px">
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>Usuarios</mat-label>
+          <mat-select formControlName="userId">
+            <mat-option *ngFor="let user of users" [value]="user.value">
+              {{ user.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('userId').hasError('required')">
+            Campo País es requerido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="16px">
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>Roles</mat-label>
+          <mat-select formControlName="roleId">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+              {{ role.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('roleId').hasError('required')">
+            Campo Role es requerido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="16px">
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="state">
+            <mat-option *ngFor="let state of configs.statesSelect" [value]="state.value">
+              {{ state.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('state').hasError('required')">
+            Campo Estado es requerido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">CANCELAR</button>
+      <button color="purple" class="bg-accent text-accent-contrast" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+    </mat-dialog-actions>
+  </form>
+

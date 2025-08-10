@@ -1,0 +1,73 @@
+<form (ngSubmit)="CommunitySave()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+      <strong>Gestión de Provincias</strong>
+    </h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Países</mat-label>
+        <mat-select formControlName="countryId" (selectionChange)="onSelectCountry($event.value)">
+          <mat-option *ngFor="let country of countries" [value]="country.value">
+            {{ country.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('countryId').hasError('required')">
+          Campo país es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Provincia</mat-label>
+        <mat-select formControlName="provinceId">
+          <mat-option *ngFor="let province of provinces" [value]="province.value">
+            {{ province.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('provinceId').hasError('required')">
+          Provincia es requerida.
+        </mat-error>
+      </mat-form-field>
+    </div>    
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Población</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="form.get('name').hasError('required')">
+          Campo Nombre es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>CP</mat-label>
+        <input matInput formControlName="cp">
+        <mat-error *ngIf="form.get('cp').hasError('required')">
+          Campo CP es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="state">
+          <mat-option *ngFor="let state of configs.statesSelect" [value]="state.value">
+            {{ state.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('state').hasError('required')">
+          Campo Estado es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCELAR</button>
+    <button color="purple" class="bg-accent text-accent-contrast" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+  </mat-dialog-actions>
+</form>

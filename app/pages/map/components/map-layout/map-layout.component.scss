@@ -1,0 +1,38 @@
+.match-parent {
+  width: 100%;
+  height: 700px;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.form-container {
+  position: absolute; // Posiciona el contenedor del formulario en un lugar específico 
+  top: 10px; // Ajusta el espacio desde la parte superior de la pantalla 
+  right: 10px; // Ajusta el espacio desde el borde derecho de la pantalla 
+  width: 300px; // Ajusta el ancho del contenedor del formulario 
+  background-color: white; // Fondo blanco para el contenedor 
+  padding: 16px; // Espaciado interno 
+  border-radius: 8px; // Bordes redondeados (opcional) 
+}
+
+.map-container {
+  width: 100%;
+  height: 100vh; // Ajusta el tamaño del mapa para ocupar toda la pantalla 
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; // Alinea los botones en extremos opuestos 
+  margin-top: -30px; // Ajusta el espacio superior para reducir la separación entre el formulario y los botones 
+}
+
+.button-group button {
+  flex: 1;  //Permite que los botones ocupen el ancho disponible 
+  margin: 0 5px; // Espacio horizontal entre los botones 
+}
+
+
+

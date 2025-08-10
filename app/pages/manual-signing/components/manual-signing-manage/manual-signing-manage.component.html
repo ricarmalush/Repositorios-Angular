@@ -1,0 +1,97 @@
+<form (ngSubmit)="SigningSave()" [formGroup]="form" fxFlex="100">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h2 class="headline m-0 text-xl text-accent" fxFlex="auto">
+      <strong>Control de Fichaje</strong>
+    </h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+  
+  <mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Usuarios</mat-label>
+        <mat-select formControlName="userId">
+          <mat-option *ngFor="let user of users" [value]="user.value">
+            {{ user.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('userId').hasError('required')">
+          Campo usuario es requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Fecha y Hora de Fichaje</mat-label>
+        <input matInput type="datetime-local" formControlName="signingDateTime" />
+        <mat-error *ngIf="form.get('signingDateTime').hasError('required') && form.get('signingDateTime').touched">
+          Campo Fecha y Hora de Fichaje es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Tipo Entrada</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of configs.TypeSelect" [value]="type.value">
+            {{ type.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('type').hasError('required')">
+          Campo Tipo Entrada es requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Provincia</mat-label>
+        <mat-select formControlName="provinceId" (selectionChange)="onSelectProvince($event.value)">
+          <mat-option *ngFor="let option of provinces" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('provinceId').hasError('required')">
+          Campo Provincia es requerido.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Población</mat-label>
+        <mat-select formControlName="communityId" (selectionChange)="onSelectCommunity($event)">
+          <mat-option *ngFor="let community of communities" [value]="community.value">
+            {{ community.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('communityId').hasError('required')">
+          La población es requerida.
+        </mat-error>
+      </mat-form-field>
+      
+              
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Calle</mat-label>
+        <input matInput formControlName="street" placeholder="Escriba la calle aquí">
+      </mat-form-field>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Causa</mat-label>
+        <input matInput formControlName="cause" placeholder="Escriba la causa aquí">
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCELAR</button>
+    <button [ngClass]="['bg-accent', 'text-accent-contrast']" mat-button type="submit" [disabled]="!form.valid">GUARDAR</button>
+  </mat-dialog-actions>
+</form>

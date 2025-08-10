@@ -1,0 +1,25 @@
+/* Estilos CSS para el formulario */
+.form-group {
+    margin-bottom: 20px; /* Espacio entre cada grupo de formularios */
+  }
+  
+  label {
+    /*font-weight: bold;*/ /* Hace la etiqueta más prominente */
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo de entrada */
+    display: block; /* Asegura que la etiqueta ocupe todo el ancho */
+  }
+  
+  .form-control {
+    border: 1px solid #ccc; /* Borde del campo de entrada */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    transition: border-color 0.3s ease; /* Transición suave al enfocar */
+  
+    &:focus {
+      border-color: #007bff; /* Color del borde al enfocar */
+      outline: none; /* Remueve el borde por defecto del navegador */
+    }
+  }
+  
